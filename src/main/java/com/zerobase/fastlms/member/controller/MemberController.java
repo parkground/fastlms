@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MemberController {
 
     private final MemberService memberService;
-/*
+/* @RequiredArgsConstructor 사용하여 아래를 대체 가능
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
@@ -37,4 +37,27 @@ public class MemberController {
 
         return "member/register_complete";
     }
+
+/*
+    http://www.naver.com:80/news/list.do?id=123&key=456&text=query
+    https://
+    protocol://domain(IP):port/sub-address/?queryString(parameter)
+    - web port : 80 (default, 생략가능)
+    - tomcat port : 8080 (test)
+
+ */
+
+    @GetMapping("/member/email-auth")
+    public String emailAuth(Model model,
+                            HttpServletRequest request) {
+
+        String uuid = request.getParameter("id");
+        System.out.println(uuid);
+
+        boolean result = memberService.emailAuth(uuid);
+        model.addAttribute("result", result);
+
+        return "member/email_auth";
+    }
 }
+
