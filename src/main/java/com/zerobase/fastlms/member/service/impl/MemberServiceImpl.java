@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
         String uuid = UUID.randomUUID().toString();
 
-        //build pattern
+        //builder pattern
         Member member = Member.builder()
                 .userId(parameter.getUserId())
                 .userName(parameter.getUserName())
