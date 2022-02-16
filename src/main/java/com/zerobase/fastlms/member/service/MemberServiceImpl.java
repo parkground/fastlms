@@ -1,6 +1,6 @@
 package com.zerobase.fastlms.member.service;
 
-import com.zerobase.fastlms.membe.entity.Member;
+import com.zerobase.fastlms.member.entity.Member;
 import com.zerobase.fastlms.member.model.MemberInput;
 import com.zerobase.fastlms.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

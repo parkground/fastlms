@@ -1,4 +1,4 @@
-package com.zerobase.fastlms.membe.entity;
+package com.zerobase.fastlms.member.entity;
 
 import lombok.Data;
 
