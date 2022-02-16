@@ -34,21 +34,23 @@ public class MemberServiceImpl implements MemberService {
 
         String uuid = UUID.randomUUID().toString();
 
-        Member member = new Member();
-        member.setUserId(parameter.getUserId());
-        member.setUserName(parameter.getUserName());
-        member.setPhone(parameter.getPhone());
-        member.setPassword(parameter.getPassword());
-        member.setRegDt(LocalDateTime.now());
-        member.setEmailAuthYn(false);
-        member.setEmailAuthKey(UUID.randomUUID().toString());
+        //build pattern
+        Member member = Member.builder()
+                .userId(parameter.getUserId())
+                .userName(parameter.getUserName())
+                .phone(parameter.getPhone())
+                .password(parameter.getPassword())
+                .regDt(LocalDateTime.now())
+                .emailAuthYn(false)
+                .emailAuthKey(uuid)
+                .build();
         memberRepository.save(member);
 
         String email = parameter.getUserId();
         String subject = "fastlms 사이트 가입을 축하드립니다.";
         String text = "<p>fastlms 사이트 가입을 축하드립니다.</p>" +
                 "<p>아래 링크를 클릭하셔서 가입을 완료 하세요.</p>" +
-                "<div><a href='http://localhost:8080/member/email-auth?id=" +
+                "<div><a target='_blank' href='http://localhost:8080/member/email-auth?id=" +
                 uuid + "'> 가입 완료 </a></div>";
         mailComponents.sendMail(email, subject, text);
 
