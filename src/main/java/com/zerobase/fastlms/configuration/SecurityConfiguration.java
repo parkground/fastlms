@@ -43,6 +43,8 @@ public class SecurityConfiguration
                         "/"         //root
                         , "/member/register"
                         , "/member/email-auth"
+                        , "/member/find/password"
+                        , "/member/reset/password"
                 )
                 .permitAll();
 
