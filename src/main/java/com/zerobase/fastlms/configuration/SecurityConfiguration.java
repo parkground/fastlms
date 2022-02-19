@@ -42,9 +42,14 @@ public class SecurityConfiguration
                 .antMatchers(
                         "/"         //root
                         , "/member/register"
-                        , "/member/email-auth"
+                        , "/member/email/auth"
                         , "/member/find/password"
                         , "/member/reset/password"
+                        , "/member/reset/password/result"
+//WEEK6 ASSIGNMENT BEGIN
+                        , "/member/email/auth/mail"
+                        , "/member/reset/password/mail"
+//WEEK6 ASSIGNMENT END
                 )
                 .permitAll();
 

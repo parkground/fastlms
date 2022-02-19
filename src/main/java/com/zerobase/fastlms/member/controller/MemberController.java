@@ -65,7 +65,13 @@ public class MemberController {
 
         return "member/register_complete";
     }
+//WEEK6 ASSIGNMENT BEGIN
+    @GetMapping("/member/email-auth-mail")
+    public String emailAuthMail() {
 
+        return "member/email_auth_mail";
+    }
+//WEEK6 ASSIGNMENT END
 /*
     http://www.naver.com:80/news/list.do?id=123&key=456&text=query
     https://
@@ -75,7 +81,7 @@ public class MemberController {
 
  */
 
-    @GetMapping("/member/email-auth")
+    @GetMapping("/member/email/auth")
     public String emailAuth(Model model,
                             HttpServletRequest request) {
 
@@ -94,10 +100,8 @@ public class MemberController {
         return "member/info";
     }
 
-    @GetMapping("/member/reset/password")
-    public String resetPassword(
-            Model model,
-            HttpServletRequest request) {
+    @RequestMapping("/member/reset/password")
+    public String resetPassword(Model model, HttpServletRequest request) {
 
         String uuid = request.getParameter("id");
 
@@ -107,7 +111,13 @@ public class MemberController {
 
         return "member/reset_password";
     }
+//WEEK6 ASSIGNMENT BEGIN
+    @GetMapping("/member/reset/password/mail")
+    public String resetPasswordMail() {
 
+        return "member/reset_password_mail";
+    }
+//WEEK6 ASSIGNMENT END
     @PostMapping("/member/reset/password")
     public String resetPasswordSubmit(
             Model model,

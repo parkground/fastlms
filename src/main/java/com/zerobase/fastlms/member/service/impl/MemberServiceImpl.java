@@ -8,7 +8,6 @@ import com.zerobase.fastlms.member.model.ResetPasswordInput;
 import com.zerobase.fastlms.member.repository.MemberRepository;
 import com.zerobase.fastlms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.bytecode.enhance.spi.interceptor.AbstractLazyLoadInterceptor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,6 +15,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.context.IContext;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final MailComponents mailComponents;
+//WEEK6 ASSIGNMENT BEGIN
+    private final TemplateEngine templateEngine;
+//WEEK6 ASSIGNMENT END
 
     /**
      * 회원 가입
@@ -58,13 +63,28 @@ public class MemberServiceImpl implements MemberService {
                 .emailAuthKey(uuid)
                 .build();
         memberRepository.save(member);
-
+//WEEK6 ASSIGNMENT BEGIN
+        Optional<Member> optionalMemberAdd =
+                memberRepository.findByUserNameAndEmailAuthKey(parameter.getUserName(), uuid);
+        if (!optionalMemberAdd.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+//WEEK6 ASSIGNMENT END
         String email = parameter.getUserId();
-        String subject = "fastlms 사이트 가입을 축하드립니다.";
+        String subject = "[fastlms] 사이트 가입을 축하드립니다.";
+
+/* LEGACY CODE
         String text = "<p>fastlms 사이트 가입을 축하드립니다.</p>" +
                 "<p>아래 링크를 클릭하셔서 가입을 완료 하세요.</p>" +
                 "<div><a target='_blank' href='http://localhost:8080/member/email-auth?id=" +
                 uuid + "'> 가입 완료 </a></div>";
+*/
+//WEEK6 ASSIGNMENT BEGIN
+        Context context = new Context();
+        context.setVariable("userName", parameter.getUserName());
+        context.setVariable("emailAuthKey", uuid);
+        String text = templateEngine.process("member/email_auth_mail", context);
+//WEEK6 ASSIGNMENT END
         mailComponents.sendMail(email, subject, text);
 
         return true;
@@ -106,14 +126,32 @@ public class MemberServiceImpl implements MemberService {
         member.setResetPasswordKey(uuid);
         member.setResetPasswordLimitDt(LocalDateTime.now().plusDays(1));
         memberRepository.save(member);
+//WEEK6 ASSIGNMENT BEGIN
+        Optional<Member> optionalMemberAdd =
+                memberRepository.
+                        findByUserNameAndResetPasswordKey(
+                                parameter.getUserName(),
+                                uuid);
+        if (!optionalMemberAdd.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+//WEEK6 ASSIGNMENT END
 
         String email = parameter.getUserId();
         String subject = "[fastlms] 비밀번호 초기화 메일입니다.";
+/* LEGACY CODE
         String text = "<p>fastlms 비밀번호 초기화 메일입니다.</p>" +
                 "<p>아래 링크를 클릭하셔서 비밀번호를 초기화 해주세요.</p>" +
                 "<div><a target='_blank'" +
                 "href='http://localhost:8080/member/reset/password?id=" +
                 uuid + "'> 비밀번호 초기화 링크 </a></div>";
+*/
+//WEEK6 ASSIGNMENT BEGIN
+        Context context = new Context();
+        context.setVariable("userName", parameter.getUserName());
+        context.setVariable("resetPasswordKey", uuid);
+        String text = templateEngine.process("member/reset_password_mail", context);
+//WEEK6 ASSIGNMENT END
         mailComponents.sendMail(email, subject, text);
 
         return true;

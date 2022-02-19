@@ -6,6 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
 
 import javax.mail.internet.MimeMessage;
 
@@ -33,9 +34,7 @@ public class MailComponents {
         MimeMessagePreparator msg = new MimeMessagePreparator() {
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper mimeMessageHelper =
-                        new MimeMessageHelper(
-                                mimeMessage, true, "UTF-8");
+                MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
                 mimeMessageHelper.setTo(mail);
                 mimeMessageHelper.setSubject(subject);
                 mimeMessageHelper.setText(text, true);
