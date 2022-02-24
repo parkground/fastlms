@@ -1,5 +1,8 @@
 package com.zerobase.fastlms.member.service.impl;
 
+import com.zerobase.fastlms.admin.dto.MemberDto;
+import com.zerobase.fastlms.admin.mapper.MemberMapper;
+import com.zerobase.fastlms.admin.model.MemberParam;
 import com.zerobase.fastlms.components.MailComponents;
 import com.zerobase.fastlms.member.entity.Member;
 import com.zerobase.fastlms.member.exception.MemberNotEmailAuthException;
@@ -17,7 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.context.IContext;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,9 +33,11 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final MailComponents mailComponents;
+    private final MemberMapper memberMapper;
 //WEEK6 ASSIGNMENT BEGIN
     private final TemplateEngine templateEngine;
 //WEEK6 ASSIGNMENT END
+
 
     /**
      * 회원 가입
@@ -213,9 +217,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> list() {
+//  public List<Member> list() {
+    public List<MemberDto> list(MemberParam parameter) {
 
-        return memberRepository.findAll();
+//      MemberDto parameter = new MemberDto();
+        List<MemberDto> list = memberMapper.selectList(parameter);
+
+        return list;
+//      return memberRepository.findAll();
     }
 
     @Override
