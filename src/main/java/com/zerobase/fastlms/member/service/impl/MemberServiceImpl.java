@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -217,14 +218,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-//  public List<Member> list() {
     public List<MemberDto> list(MemberParam parameter) {
 
-//      MemberDto parameter = new MemberDto();
-        List<MemberDto> list = memberMapper.selectList(parameter);
+        long totalCount = memberMapper.selectListCount(parameter);
 
+        List<MemberDto> list = memberMapper.selectList(parameter);
+        if (!CollectionUtils.isEmpty(list)) {
+            int i = 0;
+            for (MemberDto x : list) {
+                x.setTotalCount(totalCount);
+                x.setSeq(totalCount - parameter.getPageStart() - i);
+                i++;
+            }
+        }
         return list;
-//      return memberRepository.findAll();
     }
 
     @Override
