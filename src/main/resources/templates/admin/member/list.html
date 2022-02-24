@@ -28,7 +28,7 @@
         }
         .pager a.on {
             font-weight: bold;
-            color: #ff0000 ;
+            color: #ff0000;
         }
     </style>
 </head>
@@ -93,8 +93,12 @@
             </thead>
             <tbody>
                 <tr th:each="x : ${list}">
-                    <td th:text="${x.seq}" </td>
-                    <td th:text="${x.userId}">81scramble@naver.com</td>
+                    <td th:text="${x.seq}">1</td>
+                    <td>
+                        <a th:text="${x.userId}"
+                           th:href="${'detail.do?userId=' + x.userId}">
+                            81scramble@naver.com</a>
+                    </td>
                     <td th:text="${x.userName}">홍길동</td>
                     <td th:text="${x.phone}">010-1111-2222</td>
                     <td>
