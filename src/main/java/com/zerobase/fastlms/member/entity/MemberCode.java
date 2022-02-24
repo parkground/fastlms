@@ -7,7 +7,7 @@ public interface MemberCode {
      */
     String MEMBER_STATUS_REQ = "REQ";
 
-    /**;
+    /**
      * 현재 이용중인 상태
      */
     String MEMBER_STATUS_ING = "ING";
