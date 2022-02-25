@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <title> 관리자 화면 </title>
     <style>
-        .list table {
+        .detail table {
             width: 100%;
             border-collapse: collapse;
         }
-        .list table th, .list table td {
+        .detail table th, .detail table td {
             border: solid 1px #000000;
         }
-        p.nothing {
-            text-align: center;
-            padding: 100px;
-        }
-        .pager {
+        .buttons {
             margin-top: 20px;
             text-align: center;
         }
-        .pager a.on {
-            font-weight: bold;
-            color: #ff0000;
+        .buttons a, .buttons button {
+            border-width: 0;
+            background-color: transparent;
+            text-decoration: underline;
+            font-size: 12px;
+            line-height: 20px;
+            height: 20px;
+            color: #000000;
+            cursor: pointer;
         }
     </style>
 
@@ -32,44 +34,27 @@
         $(document).ready(function () {
         });
     </script>
-
 </head>
 <body>
-
-    <h1>강좌 관리</h1>
+    <h1>강좌 관리 - 강좌 등록</h1>
     <div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
 
-    <div>
-        <a href="/admin/course/add.do"> 강좌 등록 </a>
-    </div>
+    <form method="post">
 
-    <div class="list">
         <table>
-            <thead>
-                <th> ID </th>
-                <th>
-                    강좌명
-                </th>
-                <th>
-                    등록일
-               </th>
-            </thead>
             <tbody>
-            <tr th:each="x : ${list}">
-                <td th:text="${x.seq}">1</td>
+                <th>
+                    강좌명:
+                </th>
                 <td>
-                    <p th:text="${x.subject}"</p>
+                    <input type="text" name="subject" required placeholder="강좌명 입력"/>
                 </td>
-                <td>
-                    <p th:text="${x.regDt}"</p>
-                </td>
-            </tr>
             </tbody>
         </table>
-        <div class="pager" th:utext="${pager}">
+        <div class="buttons">
+            <button type="submit"> 강좌 등록 하기 </button>
+            <a href="/admin/course/list.do"> 목록으로 이동 </a>
         </div>
-    </div>
+    </form>
 </body>
 </html>
-
-

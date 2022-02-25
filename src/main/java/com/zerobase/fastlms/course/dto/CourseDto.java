@@ -1,37 +1,25 @@
-package com.zerobase.fastlms.course.entity;
+package com.zerobase.fastlms.course.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Data
-@Entity
-public class Course {
+public class CourseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     String imagePath;
     String keyword;
     String subject;
-
-    @Column(length = 1000)
     String summary;
-
-    @Lob
     String contents;
     long price;
     long salePrice;
     LocalDateTime saleEndDt;
-
     LocalDateTime regDt;    //등록일(추가 날짜)
     LocalDateTime udtDt;    //수정일(수정 날짜)
+
+    //Add column
+    long totalCount;
+    long seq;
 }
