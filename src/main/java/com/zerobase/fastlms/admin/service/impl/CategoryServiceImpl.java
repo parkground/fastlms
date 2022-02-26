@@ -1,9 +1,10 @@
-package com.zerobase.fastlms.admin.service;
+package com.zerobase.fastlms.admin.service.impl;
 
 import com.zerobase.fastlms.admin.dto.CategoryDto;
 import com.zerobase.fastlms.admin.entity.Category;
 import com.zerobase.fastlms.admin.model.CategoryInput;
 import com.zerobase.fastlms.admin.repository.CategoryRepository;
+import com.zerobase.fastlms.admin.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

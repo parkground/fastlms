@@ -58,10 +58,12 @@
             <tr th:each="x : ${list}">
                 <td th:text="${x.seq}">1</td>
                 <td>
-                    <p th:text="${x.subject}"</p>
+                    <p> <!-- 전체 경로 'full path', 'edit.do?id=' 같은 효과 -->
+                        <a th:href="'edit.do?id=' + ${x.id}" th:text="${x.subject}">강좌명</a>
+                    </p>
                 </td>
                 <td>
-                    <p th:text="${x.regDt}"</p>
+                    <p th:text="${x.regDt}"></p>
                 </td>
             </tr>
             </tbody>
