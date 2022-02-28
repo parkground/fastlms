@@ -17,11 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 public class MemberController {
 
     private final MemberService memberService;
-/* @RequiredArgsConstructor 사용하여 아래를 대체 가능
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
-*/
     @RequestMapping("/member/login")
     public String login() {
 
