@@ -1,5 +1,6 @@
 package com.zerobase.fastlms.course.controller;
 
+import com.zerobase.fastlms.common.model.ResponseResult;
 import com.zerobase.fastlms.course.model.ServiceResult;
 import com.zerobase.fastlms.course.model.TakeCourseInput;
 import com.zerobase.fastlms.course.service.CourseService;
@@ -27,8 +28,14 @@ public class ApiCourseController extends BaseController {
 
         ServiceResult result = courseService.req(parameter);
         if(!result.isResult()) {
-            return ResponseEntity.ok().body(result.getMessage());
+
+            ResponseResult responseResult = new ResponseResult(false, result.getMessage());
+            return ResponseEntity.ok().body(responseResult);
+            //return ResponseEntity.ok().body(result.getMessage());
         }
-        return ResponseEntity.ok().body(parameter);
+
+        ResponseResult responseResult = new ResponseResult(true);
+        return ResponseEntity.ok().body(responseResult);
+        //return ResponseEntity.ok().body(parameter);
     }
 }

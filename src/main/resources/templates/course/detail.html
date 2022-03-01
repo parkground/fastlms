@@ -30,20 +30,23 @@
                 };
 
                 axios.post(url, parameter).then(function (response) {
-
                     console.log(response);
                     console.log(response.data);
 
-                    var msg = response.data || '';
+                    response.data = response.data || {};
+                    response.data.header = response.data.header || {};
 
-                    if (msg != '') {
-                        alert(msg);
+                    if (!response.data.header.result) {
+                        alert(response.data.header.message);
+                        return false;
                     }
 
+                    //정상인 경우
+                    alert(' 강좌가 정상적으로 신청되었습니다. ');
+                    location.href = '/';
+
                 }).catch(function (err) {
-
                     console.log(err);
-
                 });
 
                 return false;
