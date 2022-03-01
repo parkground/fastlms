@@ -6,6 +6,7 @@ import com.zerobase.fastlms.course.entity.TakeCourse;
 import com.zerobase.fastlms.course.mapper.CourseMapper;
 import com.zerobase.fastlms.course.model.CourseInput;
 import com.zerobase.fastlms.course.model.CourseParam;
+import com.zerobase.fastlms.course.model.ServiceResult;
 import com.zerobase.fastlms.course.model.TakeCourseInput;
 import com.zerobase.fastlms.course.repository.CourseRepository;
 import com.zerobase.fastlms.course.repository.TakeCourseRepository;
@@ -155,12 +156,19 @@ public class CourseServiceImpl implements CourseService {
         return null;
     }
 
+    /**
+     * 수강 신청
+     */
     @Override
-    public boolean req(TakeCourseInput parameter) {
+    public ServiceResult req(TakeCourseInput parameter) {
+
+        ServiceResult result = new ServiceResult();
 
         Optional<Course> optionalCourse = courseRepository.findById(parameter.getCourseId());
         if (!optionalCourse.isPresent()) {
-            return false;
+            result.setResult(false);
+            result.setMessage("강좌 정보가 존재하지 않습니다.");
+            return result;
         }
 
         Course course = optionalCourse.get();
@@ -171,7 +179,9 @@ public class CourseServiceImpl implements CourseService {
                 , parameter.getUserId(), Arrays.asList(statusList));
 
         if (count > 0) {
-            return false;
+            result.setResult(false);
+            result.setMessage("이미 신청한 강좌 정보가 존재합니다.");
+            return result;
         }
 
         TakeCourse takeCourse = TakeCourse.builder()
@@ -183,6 +193,8 @@ public class CourseServiceImpl implements CourseService {
                 .build();
         takeCourseRepository.save(takeCourse);
 
-        return true;
+        result.setResult(true);
+        result.setMessage("");
+        return result;
     }
 }
