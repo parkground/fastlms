@@ -44,4 +44,8 @@ public class Member implements MemberCode {
 
     /* 이용가능상태, 정지상태 */
     private String userStatus;
+
+    private String zipcode;
+    private String addr;
+    private String addrDetail;
 }
