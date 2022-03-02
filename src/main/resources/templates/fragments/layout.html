@@ -33,9 +33,18 @@
     <a href="/admin/takecourse/list.do">수강 관리</a>
     |
     <a href="/member/logout">로그아웃</a>
-    <br/>
     <hr/>
 </div>
+
+<div th:fragment="fragment-member-info-menu">
+    <a href="/member/info">회원정보 수정</a>
+    |
+    <a href="/member/password">비밀번호 변경</a>
+    |
+    <a href="/member/takecourse">내 수강 목록</a>
+    <hr/>
+</div>
+
 
 </body>
 </html>

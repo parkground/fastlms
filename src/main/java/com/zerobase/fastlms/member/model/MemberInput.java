@@ -14,4 +14,6 @@ public class MemberInput {
     private String phone;
     private String password;
     private LocalDateTime regDt;
+
+    private String newPassword;
 }
