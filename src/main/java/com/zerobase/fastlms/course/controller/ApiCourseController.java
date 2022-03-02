@@ -31,11 +31,9 @@ public class ApiCourseController extends BaseController {
 
             ResponseResult responseResult = new ResponseResult(false, result.getMessage());
             return ResponseEntity.ok().body(responseResult);
-            //return ResponseEntity.ok().body(result.getMessage());
         }
 
         ResponseResult responseResult = new ResponseResult(true);
         return ResponseEntity.ok().body(responseResult);
-        //return ResponseEntity.ok().body(parameter);
     }
 }
