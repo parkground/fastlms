@@ -29,7 +29,7 @@ public class TakeCourseDto {
     long seq;
 
     public String getRegDtText() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:m");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
         return regDt != null ? regDt.format(formatter) : "";
     }
 }
