@@ -7,6 +7,7 @@ import com.zerobase.fastlms.course.service.TakeCourseService;
 import com.zerobase.fastlms.member.model.MemberInput;
 import com.zerobase.fastlms.member.model.ResetPasswordInput;
 import com.zerobase.fastlms.member.service.MemberService;
+import com.zerobase.fastlms.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,7 +69,8 @@ public class MemberController {
 
         return "member/register_complete";
     }
-//WEEK6 ASSIGNMENT BEGIN
+
+    //WEEK6 ASSIGNMENT BEGIN
     @GetMapping("/member/email-auth-mail")
     public String emailAuthMail() {
 
@@ -175,13 +177,15 @@ public class MemberController {
 
         return "member/reset_password";
     }
-//WEEK6 ASSIGNMENT BEGIN
+
+    //WEEK6 ASSIGNMENT BEGIN
     @GetMapping("/member/reset/password/mail")
     public String resetPasswordMail() {
 
         return "member/reset_password_mail";
     }
-//WEEK6 ASSIGNMENT END
+
+    //WEEK6 ASSIGNMENT END
     @PostMapping("/member/reset/password")
     public String resetPasswordSubmit(
             Model model,
@@ -198,5 +202,26 @@ public class MemberController {
 
         return "member/reset_password_result";
     }
-}
 
+    @GetMapping("/member/withdraw")
+    public String memberWithdraw(Model model) {
+
+        return "member/withdraw";
+    }
+
+    @PostMapping("/member/withdraw")
+    public String memberWithdrawSubmit(Model model
+            , MemberInput parameter
+            , Principal principal) {
+
+        String userId = principal.getName();
+
+        ServiceResult result = memberService.withdraw(userId, parameter.getPassword());
+        if (!result.isResult()) {
+            model.addAttribute("message", result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/logout";
+    }
+}

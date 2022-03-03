@@ -62,4 +62,9 @@ public interface MemberService extends UserDetailsService {
      * 회원 정보 페이지 - 비밀번호 변경
      */
     ServiceResult updateMemberPassword(MemberInput parameter);
+
+    /**
+     * 회원 탈퇴
+     */
+    ServiceResult withdraw(String userId, String password);
 }
