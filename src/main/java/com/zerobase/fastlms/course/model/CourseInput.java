@@ -18,4 +18,8 @@ public class CourseInput {
     //for delete
 //  List<String> ids;
     String idList;
+
+    //file add
+    String filename;
+    String urlFilename;
 }

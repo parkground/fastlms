@@ -48,7 +48,7 @@
 <h1>강좌 관리 - 강좌 등록</h1>
 
 <div class="detail">
-    <form id="submitForm" method="post">
+    <form id="submitForm" method="post" enctype="multipart/form-data">
         <table>
             <tbody>
             <tr>
@@ -67,7 +67,7 @@
                            name="subject" required placeholder="강좌명 입력"/></td>
             </tr>
             <tr>
-                <th> 키워드</th>
+                <th>키워드</th>
                 <td><input th:value="${detail.keyword}" type="text"
                            name="keyword" required placeholder="키워드 입력"/></td>
             </tr>
@@ -82,7 +82,7 @@
                               name="contents" placeholder="내용 입력"></textarea></td>
             </tr>
             <tr>
-                <th> 정가</th>
+                <th>정가</th>
                 <td><input th:value="${detail.price}"
                            name="price" required placeholder="정가 입력"></td>
             </tr>
@@ -92,9 +92,15 @@
                            name="salePrice" required placeholder="판매가 입력"></td>
             </tr>
             <tr>
-                <th> 할인 종료일</th>
+                <th>할인 종료일</th>
                 <td><input th:value="${detail.saleEndDt}"
                            name="saleEndDtText" placeholder="할인 종료일 입력"></td>
+            </tr>
+            <tr>
+                <th>첨부 파일</th>
+                <td>
+                    <input type="file" name="file"/>
+                </td>
             </tr>
             </tbody>
         </table>
