@@ -94,12 +94,12 @@
             <tr>
                 <th>할인 종료일</th>
                 <td><input th:value="${detail.saleEndDt}"
-                           name="saleEndDtText" placeholder="할인 종료일 입력"></td>
+                           name="saleEndDtText" required placeholder="할인 종료일 입력"></td>
             </tr>
             <tr>
                 <th>첨부 파일</th>
                 <td>
-                    <input type="file" name="file"/>
+                    <input type="file" name="file" accept="image/png, image/jpeg">
                 </td>
             </tr>
             </tbody>
