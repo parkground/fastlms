@@ -6,11 +6,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
-import org.thymeleaf.TemplateEngine;
 
 import javax.mail.internet.MimeMessage;
 
-// Mail Server Setting 필요 (SMTP)
 @RequiredArgsConstructor
 @Component
 public class MailComponents {

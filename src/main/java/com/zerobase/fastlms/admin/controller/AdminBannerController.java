@@ -1,7 +1,6 @@
 package com.zerobase.fastlms.admin.controller;
 
 import com.zerobase.fastlms.admin.dto.BannerDto;
-import com.zerobase.fastlms.admin.dto.MemberDto;
 import com.zerobase.fastlms.admin.model.BannerInput;
 import com.zerobase.fastlms.admin.model.BannerParam;
 import com.zerobase.fastlms.admin.service.BannerService;

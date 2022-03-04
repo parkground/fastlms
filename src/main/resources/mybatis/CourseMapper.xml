@@ -17,7 +17,7 @@
                 <when test="searchType == 'phone'">
                     and phone like concat('%', #{searchValue}, '%')
                 </when>
-                <otherwise> <!-- 전제인경우 (all) -->
+                <otherwise>
                     and
                     (
                     user_id like concat('%', #{searchValue}, '%')
